@@ -12,6 +12,8 @@ website:
 
 format:
   html:
+    backgroundcolor: "#778899"
+    fontcolor: "white"
     theme:
       - cosmo
       - brand
