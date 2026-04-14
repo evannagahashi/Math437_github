@@ -1,11 +1,13 @@
 ---
-title: "Math437_github"
+title: "Evan Nagahashi"
+subtitle: Student
+
+about:
+  template: jolla
+  links: 
+    - icon: github
+      text: Github
+      href: https://github.com/evannagahashi/Math437_github.git
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
+Something
