@@ -1,13 +1,17 @@
 ---
 title: "Evan Nagahashi"
-subtitle: Student
-
+subtitle: "Student"
+image: profile.jpeg
 about:
-  template: jolla
+  template: trestles
   links: 
     - icon: github
       text: Github
       href: https://github.com/evannagahashi/Math437_github.git
 ---
-
+{{< lipsum 1>}}
 Something
+
+## Education
+
+California State University, Fullerton \| Aug 2023 - May 2027
