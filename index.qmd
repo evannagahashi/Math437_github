@@ -9,8 +9,10 @@ about:
       text: Github
       href: https://github.com/evannagahashi/Math437_github.git
 ---
-{{< lipsum 1>}}
-Something
+
+A little about me and my life.
+
+I am currently an undergrad student at California State University, Fullerton with expected graduation in Spring 2027. I am a mathematics major with an applied concentration. 
 
 ## Education
 

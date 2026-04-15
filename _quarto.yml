@@ -5,10 +5,9 @@ project:
 website:
   title: "Math437_github"
   navbar:
+    title: Evan Nagahashi
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - project.qmd
 
 format:
   html:
