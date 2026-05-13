@@ -8,7 +8,6 @@ website:
     title: Evan Nagahashi
     left:
       - project.qmd
-      - math-437-project-template.qmd
 
 format:
   html:

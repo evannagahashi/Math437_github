@@ -1,5 +1,99 @@
 ---
-title: "Project"
+title: "Projection of U.S. Gas Prices using Linear Regression and Random Forrest Modeling"
 ---
 
-This page will contain the code and information to my final Math 437 Project.
+Remember to replace all of the instructions with your text!
+
+## Summary
+
+Looking at the data set "Weekly US Gas Prices" from `tidytuesday` which was obtained from the U.S. Energy Information Administration(EIA). My objective was to check if the price of Gasoline would follow a positive linear relationship or if global financial events would cause enough noise to disrupt this linear relation.
+
+![Figure 1](price_over_time_graph.png)
+
+`Figure 1` shows the average price across all grades: regular, midgrade, premium and all(a weighted average of the other grades) from August 20, 1990 to June 23, 2025. Each different color representing a different grade. From this graph we can see a clear positive linear relationship between the price and time, but there are additionally very clear spikes/dips in the price cause my global financial events, which will be explored here.
+
+
+## Motivation and Context
+
+```{r}
+#| label: do this first
+#| echo: false
+#| message: false
+
+# change this to the location of your Quarto file containing your project; then delete this comment
+here::i_am("math-437-project-template.qmd")
+```
+
+
+I am using the data set "Weekly US Gas Prices" from `tidytuesday`. This data was taken from the U.S. Energy Information Administration(EIA) which publishes retail gasoline and diesel prices each Monday. An individual named Jon Harmon, took the data from the website to be used for analysis.
+
+
+This section describes what you are investigating in your project and why you are investigating it. You should provide enough contextual background and information that someone with a limited background can understand the broad outlines of the topic being investigated.
+
+## Packages Used In This Analysis
+
+This section lists the packages used in the analysis. You should have a single chunk that loads the packages followed by a description of why you are using each package. Please use individual package names rather than tidyverse and tidymodels, to make it clear which specific packages are being used.
+
+```{r}
+#| label: load packages
+#| message: false
+#| warning: false
+
+library(here)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(rsample)
+```
+
+You should follow the template table below. Each row of the table contains the package name in brackets, a link to the package website, and (on the right side) a description of what you used the package for. If you can't find a link to the package website, or you're having trouble getting the link to work, don't worry about including it.
+
+| Package | Use |
+|-------------------------------|----------------------------------------|
+| [here](https://github.com/jennybc/here_here) | to easily load and save data |
+| [readr](https://readr.tidyverse.org/) | to import the CSV file data |
+| [dplyr](https://dplyr.tidyverse.org/) | to massage and summarize data |
+| [rsample](https://rsample.tidymodels.org/) | to split data into training and test sets |
+| [ggplot2](https://ggplot2.tidyverse.org/) | to create nice-looking and informative graphs |
+
+## Data Description
+
+This section should describe the data that you are using, the source of the data (including a link if appropriate), and how the data was originally collected. You should be able to just clean up the Data Description section from Project 2.
+
+At the end of the section you should import the data, unless it's already in one of the packages you loaded.
+
+```{r}
+#| label: import data
+#| warning: false
+
+```
+
+## Data Wrangling (Optional Section)
+
+If you did any data wrangling on Project 2, include it here. If you are creating training and test sets for predictive modeling, you should also include that code in an appropriate place in this section.
+
+## Exploratory Data Analysis
+
+This section should include the code, figures, and accompanying text for the exploratory data analysis that is relevant to your objective. You should be able to just clean up the EDA section from Project 2.
+
+## Modeling
+
+The section should include the code, output, and accompanying descriptions for *one* supervised or unsupervised learning model, as appropriate to your question or objective. The descriptions should include some conceptual or mathematical background explaining how the model works.
+
+You should be able to just clean up one of the modeling sections from Project 2.
+
+## Insights/Conclusion
+
+Pick either "Insights" or "Conclusion" as the section title depending on what makes more sense.
+
+Describe the primary findings from your EDA and modeling sections as appropriate to the main question/objective. You can reproduce the figure from your summary if that helps.
+
+### Limitations and Future Work
+
+This section should include further exploration of the limitations of your modeling approach. Some avenues of exploration include:
+
+-   Who/what is being poorly predicted by your model? Why?
+-   How might someone improve the data collection or analysis in the future?
+-   Are the assumptions behind your analytical methods justified?
+-   Are there ethical concerns about how the data was collected or how the results of the analysis could be used in the real world?
+
