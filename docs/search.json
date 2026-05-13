@@ -33,5 +33,68 @@
     "title": "Project",
     "section": "",
     "text": "This page will contain the code and information to my final Math 437 Project."
+  },
+  {
+    "objectID": "math-437-project-template.html",
+    "href": "math-437-project-template.html",
+    "title": "Replace this with an interesting title",
+    "section": "",
+    "text": "Remember to replace all of the instructions with your text!"
+  },
+  {
+    "objectID": "math-437-project-template.html#summary",
+    "href": "math-437-project-template.html#summary",
+    "title": "Replace this with an interesting title",
+    "section": "Summary",
+    "text": "Summary\nLooking at the data set “Weekly US Gas Prices” from tidytuesday which was obtained from the U.S. Energy Information Administration(EIA). My objective was to check if the price of Gasoline would follow a positive linear relationship or if global financial events would cause enough noise to disrupt this linear relation.\n\n\n\nFigure 1\n\n\nFigure 1 shows the average price across all grades: regular, midgrade, premium and all(a weighted average of the other grades) from August 20, 1990 to June 23, 2025. Each different color representing a different grade. From this graph we can see a clear positive linear relationship between the price and time, but there are additionally very clear spikes/dips in the price cause my global financial events, which will be explored here."
+  },
+  {
+    "objectID": "math-437-project-template.html#motivation-and-context",
+    "href": "math-437-project-template.html#motivation-and-context",
+    "title": "Replace this with an interesting title",
+    "section": "Motivation and Context",
+    "text": "Motivation and Context\nI am using the data set “Weekly US Gas Prices” from tidytuesday. This data was taken from the U.S. Energy Information Administration(EIA) which publishes retail gasoline and diesel prices each Monday. An individual named Jon Harmon, took the data from the website to be used for analysis.\nThis section describes what you are investigating in your project and why you are investigating it. You should provide enough contextual background and information that someone with a limited background can understand the broad outlines of the topic being investigated."
+  },
+  {
+    "objectID": "math-437-project-template.html#packages-used-in-this-analysis",
+    "href": "math-437-project-template.html#packages-used-in-this-analysis",
+    "title": "Replace this with an interesting title",
+    "section": "Packages Used In This Analysis",
+    "text": "Packages Used In This Analysis\nThis section lists the packages used in the analysis. You should have a single chunk that loads the packages followed by a description of why you are using each package. Please use individual package names rather than tidyverse and tidymodels, to make it clear which specific packages are being used.\n\nlibrary(here)\nlibrary(readr)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(rsample)\n\nYou should follow the template table below. Each row of the table contains the package name in brackets, a link to the package website, and (on the right side) a description of what you used the package for. If you can’t find a link to the package website, or you’re having trouble getting the link to work, don’t worry about including it.\n\n\n\nPackage\nUse\n\n\n\n\nhere\nto easily load and save data\n\n\nreadr\nto import the CSV file data\n\n\ndplyr\nto massage and summarize data\n\n\nrsample\nto split data into training and test sets\n\n\nggplot2\nto create nice-looking and informative graphs"
+  },
+  {
+    "objectID": "math-437-project-template.html#data-description",
+    "href": "math-437-project-template.html#data-description",
+    "title": "Replace this with an interesting title",
+    "section": "Data Description",
+    "text": "Data Description\nThis section should describe the data that you are using, the source of the data (including a link if appropriate), and how the data was originally collected. You should be able to just clean up the Data Description section from Project 2.\nAt the end of the section you should import the data, unless it’s already in one of the packages you loaded."
+  },
+  {
+    "objectID": "math-437-project-template.html#data-wrangling-optional-section",
+    "href": "math-437-project-template.html#data-wrangling-optional-section",
+    "title": "Replace this with an interesting title",
+    "section": "Data Wrangling (Optional Section)",
+    "text": "Data Wrangling (Optional Section)\nIf you did any data wrangling on Project 2, include it here. If you are creating training and test sets for predictive modeling, you should also include that code in an appropriate place in this section."
+  },
+  {
+    "objectID": "math-437-project-template.html#exploratory-data-analysis",
+    "href": "math-437-project-template.html#exploratory-data-analysis",
+    "title": "Replace this with an interesting title",
+    "section": "Exploratory Data Analysis",
+    "text": "Exploratory Data Analysis\nThis section should include the code, figures, and accompanying text for the exploratory data analysis that is relevant to your objective. You should be able to just clean up the EDA section from Project 2."
+  },
+  {
+    "objectID": "math-437-project-template.html#modeling",
+    "href": "math-437-project-template.html#modeling",
+    "title": "Replace this with an interesting title",
+    "section": "Modeling",
+    "text": "Modeling\nThe section should include the code, output, and accompanying descriptions for one supervised or unsupervised learning model, as appropriate to your question or objective. The descriptions should include some conceptual or mathematical background explaining how the model works.\nYou should be able to just clean up one of the modeling sections from Project 2."
+  },
+  {
+    "objectID": "math-437-project-template.html#insightsconclusion",
+    "href": "math-437-project-template.html#insightsconclusion",
+    "title": "Replace this with an interesting title",
+    "section": "Insights/Conclusion",
+    "text": "Insights/Conclusion\nPick either “Insights” or “Conclusion” as the section title depending on what makes more sense.\nDescribe the primary findings from your EDA and modeling sections as appropriate to the main question/objective. You can reproduce the figure from your summary if that helps.\n\nLimitations and Future Work\nThis section should include further exploration of the limitations of your modeling approach. Some avenues of exploration include:\n\nWho/what is being poorly predicted by your model? Why?\nHow might someone improve the data collection or analysis in the future?\nAre the assumptions behind your analytical methods justified?\nAre there ethical concerns about how the data was collected or how the results of the analysis could be used in the real world?"
   }
 ]

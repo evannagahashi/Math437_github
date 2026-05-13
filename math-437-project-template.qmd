@@ -8,27 +8,7 @@ Remember to replace all of the instructions with your text!
 
 Looking at the data set "Weekly US Gas Prices" from `tidytuesday` which was obtained from the U.S. Energy Information Administration(EIA). My objective was to check if the price of Gasoline would follow a positive linear relationship or if global financial events would cause enough noise to disrupt this linear relation.
 
-```{r}
-#| label: Figure 1
-
-ggplot(
-  gas_prices_train,
-  mapping = aes(x = price)
-) + 
-  geom_histogram(bins = 40, fill = "dodgerblue", color = "white") +
-  labs(x = "Price(USD per gallon)",
-       y = "Count") +
-  facet_wrap(~ grade)
-
-gas_prices_train |>
-  group_by(date = floor_date(date, "month"), grade) |>
-  summarise(avg_price = mean(price), .groups = "drop_last") |>
-  ggplot(
-    mapping = aes(x = date, y = avg_price, color = grade)
-  ) + geom_line()
-
-
-```
+![Figure 1](price_over_time_graph.png)
 
 `Figure 1` shows the average price across all grades: regular, midgrade, premium and all(a weighted average of the other grades) from August 20, 1990 to June 23, 2025. Each different color representing a different grade. From this graph we can see a clear positive linear relationship between the price and time, but there are additionally very clear spikes/dips in the price cause my global financial events, which will be explored here.
 
