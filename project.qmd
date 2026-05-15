@@ -18,12 +18,8 @@ Looking at the data set "Weekly US Gas Prices" from `tidytuesday` which was obta
 #| echo: false
 #| message: false
 
-# change this to the location of your Quarto file containing your project; then delete this comment
 here::i_am("project.qmd")
 ```
-
-
-
 
 
 ## Packages Used In This Analysis
