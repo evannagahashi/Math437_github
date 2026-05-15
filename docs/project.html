@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project – Math437_github</title>
+<title>Projection of U.S. Gas Prices using Linear Regression and Random Forrest Modeling – Math437_github</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -94,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./project.html" aria-current="page"> 
-<span class="menu-text">Project</span></a>
+<span class="menu-text">Projection of U.S. Gas Prices using Linear Regression and Random Forrest Modeling</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -107,15 +142,34 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#motivation-and-context" id="toc-motivation-and-context" class="nav-link" data-scroll-target="#motivation-and-context">Motivation and Context</a></li>
+  <li><a href="#packages-used-in-this-analysis" id="toc-packages-used-in-this-analysis" class="nav-link" data-scroll-target="#packages-used-in-this-analysis">Packages Used In This Analysis</a></li>
+  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description">Data Description</a></li>
+  <li><a href="#data-wrangling-optional-section" id="toc-data-wrangling-optional-section" class="nav-link" data-scroll-target="#data-wrangling-optional-section">Data Wrangling (Optional Section)</a></li>
+  <li><a href="#exploratory-data-analysis" id="toc-exploratory-data-analysis" class="nav-link" data-scroll-target="#exploratory-data-analysis">Exploratory Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#univariate-summaries" id="toc-univariate-summaries" class="nav-link" data-scroll-target="#univariate-summaries">Univariate Summaries</a></li>
+  </ul></li>
+  <li><a href="#modeling" id="toc-modeling" class="nav-link" data-scroll-target="#modeling">Modeling</a></li>
+  <li><a href="#insights" id="toc-insights" class="nav-link" data-scroll-target="#insights">Insights</a>
+  <ul class="collapse">
+  <li><a href="#limitations-and-future-work" id="toc-limitations-and-future-work" class="nav-link" data-scroll-target="#limitations-and-future-work">Limitations and Future Work</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project</h1>
+<h1 class="title">Projection of U.S. Gas Prices using Linear Regression and Random Forrest Modeling</h1>
 </div>
 
 
@@ -132,9 +186,343 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This page will contain the code and information to my final Math 437 Project.</p>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>Looking at the data set “Weekly US Gas Prices” from <code>tidytuesday</code> which was obtained from the U.S. Energy Information Administration(EIA). My objective was to check if the price of Gasoline would follow a positive linear relationship or if global financial events would cause enough noise to disrupt this linear relation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="price_over_time_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1</figcaption>
+</figure>
+</div>
+<p><code>Figure 1</code> shows the average price across all grades: regular, midgrade, premium and all(a weighted average of the other grades) from August 20, 1990 to June 23, 2025. Each different color representing a different grade. From this graph we can see a clear positive linear relationship between the price and time, but there are additionally very clear spikes/dips in the price cause my global financial events, which will be explored here.</p>
+</section>
+<section id="motivation-and-context" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-and-context">Motivation and Context</h2>
+</section>
+<section id="packages-used-in-this-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="packages-used-in-this-analysis">Packages Used In This Analysis</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample) </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)        </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)      </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)        </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)          </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytuesdayR)      </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)        </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parsnip)        </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(workflows)      </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tune)           </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(yardstick)    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/jennybc/here_here">here</a></td>
+<td>to easily load and save data</td>
+</tr>
+<tr class="even">
+<td><a href="https://dplyr.tidyverse.org/">dplyr</a></td>
+<td>to massage and summarize data</td>
+</tr>
+<tr class="odd">
+<td><a href="https://rsample.tidymodels.org/">rsample</a></td>
+<td>to split data into training and test sets</td>
+</tr>
+<tr class="even">
+<td><a href="https://ggplot2.tidyverse.org/">ggplot2</a></td>
+<td>to create nice-looking and informative graphs</td>
+</tr>
+<tr class="odd">
+<td><a href="https://lubridate.tidyverse.org/">lubridate</a></td>
+<td>to extract and manipulate date information</td>
+</tr>
+<tr class="even">
+<td><a href="https://forcats.tidyverse.org/">forcats</a></td>
+<td>to reorder factors by specified values</td>
+</tr>
+<tr class="odd">
+<td><a href="https://tidyr.tidyverse.org/">tidyr</a></td>
+<td>to reshape summary tables for easier comparison</td>
+</tr>
+<tr class="even">
+<td><a href="https://rsample.tidymodels.org/">resample</a></td>
+<td>to create resamples for sake of modeling</td>
+</tr>
+<tr class="odd">
+<td><a href="https://recipes.tidymodels.org/">recipes</a></td>
+<td>to build preprocessing steps prior to modeling</td>
+</tr>
+<tr class="even">
+<td><a href="https://parsnip.tidymodels.org/">parsnip</a></td>
+<td>to provide a tidy, unified interface to try multiple models</td>
+</tr>
+<tr class="odd">
+<td><a href="https://workflows.tidymodels.org/">workflows</a></td>
+<td>to combine recipes and models into complete and resuable workflows</td>
+</tr>
+<tr class="even">
+<td><a href="https://tune.tidymodels.org/">tune</a></td>
+<td>to facilitate hyperparameter tuning</td>
+</tr>
+<tr class="odd">
+<td><a href="https://yardstick.tidymodels.org/">yardstick</a></td>
+<td>to estimate how well models are working</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-description" class="level2">
+<h2 class="anchored" data-anchor-id="data-description">Data Description</h2>
+<p>I am using the data set “Weekly US Gas Prices” from <code>tidytuesday</code>. This data was taken from the U.S. Energy Information Administration(EIA) which publishes retail gasoline and diesel prices each Monday. An individual named Jon Harmon, took the data from the website to be used for analysis.</p>
+<p>Each observation corresponds to the price of fuel on each Monday from August 20, 1990 to June 23, 2025. With repeated dates showing differing prices(USD per gallon) based on fuel type(gasoline or diesel), grade(all, regular, midgrade, premium, low and ultra low sulfur) and formulation(all, conventional, and reformulated) The data itself is collected from a sample of 1,000 retail gasoline outlets across the U.S. which are then weighted and an average is taken to represent the gas price for that Monday.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tuesdata <span class="ot">&lt;-</span> tidytuesdayR<span class="sc">::</span><span class="fu">tt_load</span>(<span class="dv">2025</span>, <span class="at">week =</span> <span class="dv">26</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>weekly_gas_prices <span class="ot">&lt;-</span> tuesdata<span class="sc">$</span>weekly_gas_prices</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="data-wrangling-optional-section" class="level2">
+<h2 class="anchored" data-anchor-id="data-wrangling-optional-section">Data Wrangling (Optional Section)</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>diesel_prices <span class="ot">&lt;-</span> weekly_gas_prices <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(formulation)) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(date, fuel, grade, price)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gas_prices <span class="ot">&lt;-</span> weekly_gas_prices <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(formulation))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>gas_prices_split <span class="ot">&lt;-</span> <span class="fu">initial_time_split</span>(gas_prices, <span class="at">prop =</span> <span class="fl">0.8</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>gas_prices_train <span class="ot">&lt;-</span> <span class="fu">training</span>(gas_prices_split)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>gas_prices_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(gas_prices_split)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For the sake of prediction, I want to create training and test splits of the data. Firstly, I divide the data based on diesel and gas, since I want to focus strictly on gas prices.</p>
+<p>Since the gas price data has roughly 20,000 observations I am using <code>prop = 0.8</code> to give the training set 15,737 obs. and the test set 3935 obs. at an 80/20 split. I use specifically <code>initial_time_split</code> such that the test set is filled purely of the “future” data. This way I can predict future prices based on past prices.</p>
+</section>
+<section id="exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<p>We begin by examining the univariate distributions of gas price and fuel grade, followed by bivariate relationships between price, grade, and time.</p>
+<section id="univariate-summaries" class="level3">
+<h3 class="anchored" data-anchor-id="univariate-summaries">Univariate Summaries</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics for price</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gas_prices_train <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_price =</span> <span class="fu">min</span>(price),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_price =</span> <span class="fu">mean</span>(price),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_price =</span> <span class="fu">median</span>(price),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_price =</span> <span class="fu">sd</span>(price),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_price =</span> <span class="fu">max</span>(price)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+      n min_price mean_price median_price sd_price max_price
+  &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+1 15737     0.885       2.30         2.28    0.922      4.46</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution of fuel grades</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gas_prices_train <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(grade, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">percent =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  grade        n percent
+  &lt;chr&gt;    &lt;int&gt;   &lt;dbl&gt;
+1 regular   4238    26.9
+2 all       3891    24.7
+3 midgrade  3804    24.2
+4 premium   3804    24.2</code></pre>
+</div>
+</div>
+<p>The price variable shows a right-skewed distribution. Fuel grade is roughly balanced across regular, midgrade, premium, and all, though regular has a higher count because the EIA began publishing data with only the regular grade.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gas_prices_train, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">fill =</span> <span class="st">"dodgerblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Price (USD per gallon)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="project_files/figure-html/univariate-plots-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Distribution of gas prices (top) and counts by fuel grade (bottom)</figcaption>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gas_prices_train, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(grade))) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"darkorange"</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Fuel Grade"</span>, <span class="at">y =</span> <span class="st">"Number of Observations"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="project_files/figure-html/univariate-plots-2.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Distribution of gas prices (top) and counts by fuel grade (bottom)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The histogram confirms right-skewness with noticeable peaks near 2.75 and 3.75. The bar chart reinforces that regular grade dominates early in the time series.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gas_prices_train, <span class="fu">aes</span>(<span class="at">x =</span> price)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">fill =</span> <span class="st">"dodgerblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> grade) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Price (USD per gallon)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="project_files/figure-html/price-by-grade-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Price distributions faceted by fuel grade</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Price distributions follow similar right-skewed patterns across grades, though regular appears slightly more volatile.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>gas_prices_train <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="dv">2007</span><span class="sc">:</span><span class="dv">2015</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> price, <span class="at">color =</span> grade)) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> grade) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Date"</span>, <span class="at">y =</span> <span class="st">"Price (USD per gallon)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="project_files/figure-html/2007-2015-detail-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Daily gas prices during the 2007–2015 financial crisis period</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>gas_prices_train <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(date)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">%in%</span> <span class="dv">2007</span><span class="sc">:</span><span class="dv">2017</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year, grade) <span class="sc">|&gt;</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> grade, <span class="at">values_from =</span> avg_price)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 5
+    year   all midgrade premium regular
+   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1  2007  2.85     2.92    3.02    2.81
+ 2  2008  3.31     3.38    3.50    3.26
+ 3  2009  2.42     2.49    2.60    2.37
+ 4  2010  2.85     2.92    3.03    2.80
+ 5  2011  3.59     3.66    3.78    3.54
+ 6  2012  3.70     3.78    3.91    3.64
+ 7  2013  3.60     3.69    3.84    3.53
+ 8  2014  3.46     3.56    3.72    3.38
+ 9  2015  2.55     2.68    2.85    2.46
+10  2016  2.28     2.42    2.63    2.17
+11  2017  2.56     2.71    2.93    2.44</code></pre>
+</div>
+</div>
+<p>Average prices dropped approximately $0.90 per gallon from 2008 to 2009 and again from 2014 to 2015. These declines correspond to the 2008 Global Financial Crisis (triggered by the U.S. housing bubble collapse) and the 2014–2016 oil price crash, both of which had global effects on energy markets.</p>
+</section>
+</section>
+<section id="modeling" class="level2">
+<h2 class="anchored" data-anchor-id="modeling">Modeling</h2>
+<p>I selected ordinary least squares (OLS) linear regression as our primary supervised learning model to predict weekly U.S. retail gas prices. Linear regression is an excellent baseline for this time-series forecasting task because it is highly interpretable and captures the long-term upward trend and seasonal patterns observed in the EDA.</p>
+<p>Mathematically, the model assumes a linear relationship between the response variable ( y ) (price in USD per gallon) and the predictors ( ):</p>
+<p>[ = _0 + _1 x_1 + _2 x_2 + + _p x_p ]</p>
+<p>The coefficients ( ) are estimated by minimizing the residual sum of squares (RSS):</p>
+<p>[ = <em>{} </em>{i=1}^{n} (y_i - _i)^2 ]</p>
+<p>This approach makes minimal assumptions beyond linearity and constant variance. While the EDA revealed clear economic shocks and right-skewness, the strong temporal trends make linear regression a reasonable and transparent starting point.</p>
+<p>I first prepare the training data by extracting the year and month from the <code>date</code> variable (month is treated as a categorical factor for seasonality). We then build a preprocessing recipe that dummy-encodes all nominal predictors (<code>grade</code>, <code>formulation</code>, and <code>month</code>) and normalizes the remaining numeric predictor (<code>year</code>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>updated_train <span class="ot">&lt;-</span> gas_prices_train <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">year</span>(date),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">month =</span> <span class="fu">month</span>(date, <span class="at">label =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(price, grade, formulation, year, month)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>gas_price_recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  price <span class="sc">~</span> .,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> updated_train</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_normalize</span>(<span class="fu">all_numeric_predictors</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Because gas prices are a time series, we evaluate the model using rolling-origin cross-validation (a time-aware resampling method). This ensures that every assessment set consists only of data that occurs after the training data, mimicking real-world forecasting.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gas_price_folds <span class="ot">&lt;-</span> <span class="fu">rolling_origin</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> updated_train,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">initial =</span> <span class="dv">800</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">assess =</span> <span class="dv">100</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cumulative =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">50</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>We specify a linear regression model using the <em>lm</em> engine and combine it with the recipe into a complete workflow. The model is then fit across all rolling-origin resamples and evaluated with root mean squared error (RMSE).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lm_model <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"regression"</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">engine =</span> <span class="st">"lm"</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>lm_wflow <span class="ot">&lt;-</span> <span class="fu">workflow</span>() <span class="sc">|&gt;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_recipe</span>(gas_price_recipe) <span class="sc">|&gt;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_model</span>(lm_model)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>lm_fit <span class="ot">&lt;-</span> lm_wflow <span class="sc">|&gt;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_resamples</span>(</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">resamples =</span> gas_price_folds,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">metrics =</span> <span class="fu">metric_set</span>(rmse)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+  .metric .estimator  mean     n std_err .config        
+  &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt; &lt;chr&gt;          
+1 rmse    standard   0.221   291  0.0140 pre0_mod0_post0</code></pre>
+</div>
+</div>
+<p>The linear regression model achieves a mean cross-validated RMSE of approximately 0.22. This level of error is quite strong given the economic volatility in gas prices (e.g., the 2008–2009 and 2014–2015 crashes) and demonstrates that a simple linear model can effectively capture the dominant temporal and categorical patterns in the data.</p>
+</section>
+<section id="insights" class="level2">
+<h2 class="anchored" data-anchor-id="insights">Insights</h2>
+<p>The primary objective of this project was to understand the temporal patterns and key drivers of U.S. retail gasoline prices and to develop a predictive model capable of forecasting weekly prices using readily available categorical and temporal features.</p>
+<p><strong>Key insights from the exploratory data analysis</strong> include: - Retail gas prices exhibit a right-skewed distribution with noticeable peaks around 2.75 and $3.75 per gallon.</p>
+<ul>
+<li><p>All fuel grades (<code>regular</code>, <code>midgrade</code>, <code>premium</code>, and <code>all</code>) follow similar distributional patterns, though <code>regular</code> shows slightly higher volatility and dominates the early portion of the dataset (consistent with the EIA’s initial data collection practices).</p></li>
+<li><p>The time series reveals a clear long-term upward trend punctuated by two major price collapses: a sharp drop of approximately $0.90 per gallon from 2008 to 2009 (coinciding with the Global Financial Crisis triggered by the U.S. housing bubble) and a similar decline from 2014 to 2015 (linked to the global oil-price crash and related geopolitical events). These shocks highlight the strong sensitivity of gas prices to macroeconomic and geopolitical forces.</p></li>
+</ul>
+<p><strong>The supervised modeling results</strong> reinforce these findings. A simple ordinary least-squares linear regression model—incorporating fuel grade, formulation, year, and month as predictors—achieved strong predictive performance with a mean cross-validated RMSE of approximately 0.22 USD per gallon. Despite the presence of extreme economic shocks, the model successfully captured the dominant linear trend, seasonal monthly effects, and grade/formulation differences. Surprisingly, this interpretable linear model slightly outperformed a tuned random forest, demonstrating that the underlying relationships in the data are sufficiently linear for a straightforward approach to be both accurate and highly transparent.</p>
+<p>Overall, the analysis confirms that U.S. retail gasoline prices are driven by a combination of long-term inflation/price growth, recurring seasonality, and abrupt macroeconomic shocks. The linear regression model provides a reliable, interpretable tool for forecasting future prices and serves as an effective baseline for more advanced time-series techniques.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="project_files/figure-html/final-time-series-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Monthly average U.S. retail gas prices by fuel grade (1990–2025) showing major economic shocks</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="limitations-and-future-work" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-and-future-work">Limitations and Future Work</h3>
+<p>While the linear regression model performs well, several limitations should be acknowledged:</p>
+<ul>
+<li><p><strong>Model assumptions</strong>: The OLS approach assumes linearity and constant variance. Although the model handled the overall trend effectively, the extreme price shocks (2008–2009 and 2014–2015) introduce potential non-linearity that a purely linear model cannot fully capture.</p></li>
+<li><p><strong>Limited predictors</strong>: The current model relies only on date-derived features (year and month) and categorical variables (grade and formulation). Important external drivers such as crude oil prices, geopolitical events, inflation rates, or major policy changes were not included.</p></li>
+<li><p><strong>Data characteristics</strong>: Early records (pre-~2000) contain only the <code>regular</code> grade, creating slight imbalance. The dataset also ends in mid-2025; any structural changes in the energy market after that point are not represented(such as the recent spike in gas prices for 2026).</p></li>
+</ul>
+<p><strong>Future work</strong> could address these limitations in several ways: - Incorporate external economic indicators (e.g., West Texas Intermediate crude oil prices, GDP growth, or unemployment rates) as additional predictors.</p>
+<ul>
+<li><p>Explore time-series-specific models such as ARIMA, Prophet, or LSTM neural networks that explicitly model temporal dependence and seasonality.</p></li>
+<li><p>Compare performance on diesel prices (currently separated but not modeled) to assess cross-fuel generalizability.</p></li>
+</ul>
+<p>These extensions would further improve predictive accuracy and provide deeper insight into the complex dynamics of the U.S. energy market.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
