@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Projection of U.S. Gas Prices using Linear Regression and Random Forrest Modeling – Math437_github</title>
+<title>Projection of U.S. Gas Prices using Linear Regression – Math437_github</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,7 +129,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./project.html" aria-current="page"> 
-<span class="menu-text">Projection of U.S. Gas Prices using Linear Regression and Random Forrest Modeling</span></a>
+<span class="menu-text">Projection of U.S. Gas Prices using Linear Regression</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Projection of U.S. Gas Prices using Linear Regression and Random Forrest Modeling</h1>
+<h1 class="title">Projection of U.S. Gas Prices using Linear Regression</h1>
 </div>
 
 
@@ -391,7 +391,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="project_files/figure-html/2007-2015-detail-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Daily gas prices during the 2007–2015 financial crisis period</figcaption>
+<figcaption>Weekly gas prices during the 2007–2015 financial crisis period</figcaption>
 </figure>
 </div>
 </div>
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The coefficients ( ) are estimated by minimizing the residual sum of squares (RSS):</p>
 <p>[ = <em>{} </em>{i=1}^{n} (y_i - _i)^2 ]</p>
 <p>This approach makes minimal assumptions beyond linearity and constant variance. While the EDA revealed clear economic shocks and right-skewness, the strong temporal trends make linear regression a reasonable and transparent starting point.</p>
-<p>I first prepare the training data by extracting the year and month from the <code>date</code> variable (month is treated as a categorical factor for seasonality). We then build a preprocessing recipe that dummy-encodes all nominal predictors (<code>grade</code>, <code>formulation</code>, and <code>month</code>) and normalizes the remaining numeric predictor (<code>year</code>).</p>
+<p>I first prepare the training data by extracting the year and month from the <code>date</code> variable (month is treated as a categorical factor for seasonality). I then build a preprocessing recipe that dummy-encodes all nominal predictors (<code>grade</code>, <code>formulation</code>, and <code>month</code>) and normalizes the remaining numeric predictor (<code>year</code>).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>updated_train <span class="ot">&lt;-</span> gas_prices_train <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
@@ -447,7 +447,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal_predictors</span>()) <span class="sc">|&gt;</span></span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_normalize</span>(<span class="fu">all_numeric_predictors</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Because gas prices are a time series, we evaluate the model using rolling-origin cross-validation (a time-aware resampling method). This ensures that every assessment set consists only of data that occurs after the training data, mimicking real-world forecasting.</p>
+<p>Because gas prices are a time series, I evaluate the model using rolling-origin cross-validation (a time-aware resampling method). This ensures that every assessment set consists only of data that occurs after the training data, mimicking real-world forecasting.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">5</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gas_price_folds <span class="ot">&lt;-</span> <span class="fu">rolling_origin</span>(</span>
@@ -458,7 +458,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">50</span></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We specify a linear regression model using the <em>lm</em> engine and combine it with the recipe into a complete workflow. The model is then fit across all rolling-origin resamples and evaluated with root mean squared error (RMSE).</p>
+<p>I specify a linear regression model using the <em>lm</em> engine and combine it with the recipe into a complete workflow. The model is then fit across all rolling-origin resamples and evaluated with root mean squared error (RMSE).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>lm_model <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"regression"</span>,</span>
